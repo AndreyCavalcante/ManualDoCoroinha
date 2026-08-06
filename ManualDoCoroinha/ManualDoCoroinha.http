@@ -1,0 +1,6 @@
+@ManualDoCoroinha_HostAddress = http://localhost:5264
+
+GET {{ManualDoCoroinha_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
