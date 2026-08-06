@@ -22,6 +22,7 @@ public class PrayerController : ApiController
         _mapper = mapper;
     }
 
+    [AllowAnonymous]
     [HttpGet("search/{page:int}/{take:int}")]
     public async Task<ActionResult<IEnumerable<PrayerDto>>> GetPrayersByName([FromQuery] string? search, int page, int take = 10)
     {
