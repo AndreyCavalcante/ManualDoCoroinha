@@ -29,4 +29,16 @@ public class AlternativeController : ApiController
         result.Items = dto;
         return Ok(result);
     }
+
+    [HttpPost]
+    public async Task<ActionResult<AlternativeDto>> Post([FromBody] CreateAlternativeDto alternativeDto)
+    {
+        if (alternativeDto is null)
+            return BadRequest(new { success = false, error = "Nenhuma alternativa foi adicionada" });
+        var alternative = _mapper.Map<Alternative>(alternativeDto);
+        var newAlternative = await _uof.AlternativeRepository.Create(alternative);
+        _uof.Commit();
+        var dto = _mapper.Map<AlternativeDto>(newAlternative);
+        return Ok(new { success = true, data = dto });
+    }
 }
