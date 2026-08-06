@@ -66,7 +66,7 @@ public class AuthController : ApiController
 
             user.RefreshToken = refreshToken;
 
-            user.RefreshTokenExpiryTime = DateTime.Now.AddMinutes(refreshTokenValidityImMinutes);
+            user.RefreshTokenExpiryTime = DateTime.UtcNow.AddMinutes(refreshTokenValidityImMinutes);
 
             await _userManager.UpdateAsync(user);
 
@@ -156,7 +156,7 @@ public class AuthController : ApiController
 
         var user = await _userManager.FindByNameAsync(username!);
 
-        if(user == null || user.RefreshToken != refreshToken || user.RefreshTokenExpiryTime <= DateTime.Now)
+        if(user == null || user.RefreshToken != refreshToken || user.RefreshTokenExpiryTime <= DateTime.UtcNow)
             return BadRequest(new { success = false, message = "Token inválido." });
 
         var newAccessToken = _tokenService.GenerateAccessToken(principal.Claims.ToList(), _config);
