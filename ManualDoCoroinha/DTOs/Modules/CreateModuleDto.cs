@@ -9,5 +9,5 @@ public class CreateModuleDto
     public string Description { get; set; }
     public int Order { get; set; }
     public bool IsActive { get; set; }
-    public bool PrerequisiteId { get; set; }
+    public Guid? PrerequisiteId { get; set; }
 }
