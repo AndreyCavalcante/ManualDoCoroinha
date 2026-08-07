@@ -116,7 +116,7 @@ public class AuthController : ApiController
         var result = await _userManager.CreateAsync(user, model.Password);
 
         if (!result.Succeeded)
-            return BadRequest(new { success = false, message = "Ocorreu um erro inesperado ao registrar o usuário" });
+            return BadRequest(new { success = false, message = result.Errors.Select(e => e.Description) });
 
         return Ok(new { success = true, message = "Usuário criado com sucesso." });
     }
