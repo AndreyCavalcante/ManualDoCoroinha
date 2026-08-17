@@ -1,12 +1,17 @@
 ﻿FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
+
 WORKDIR /src
 
 COPY . .
 
-RUN dotnet restore
-RUN dotnet publish -c Release -o /app/publish
+RUN dotnet restore Services/ManualDoCoroinha/ManualDoCoroinha.csproj
 
-FROM mcr.microsoft.com/dotnet/aspnet:8.0
+RUN dotnet publish Services/ManualDoCoroinha/ManualDoCoroinha.csproj \
+    -c Release \
+    -o /app/publish \
+    --no-restore
+
+FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS final
 
 WORKDIR /app
 
