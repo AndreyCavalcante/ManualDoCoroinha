@@ -4,9 +4,9 @@ WORKDIR /src
 
 COPY . .
 
-RUN dotnet restore ManualDoCoroinha.csproj
+RUN dotnet restore Services/ManualDoCoroinha/ManualDoCoroinha.csproj
 
-RUN dotnet publish ManualDoCoroinha.csproj \
+RUN dotnet publish Services/ManualDoCoroinha/ManualDoCoroinha.csproj \
     -c Release \
     -o /app/publish \
     --no-restore
