@@ -1,0 +1,106 @@
+﻿@page "/"
+@page "/login"
+@layout AuthLayout
+@rendermode InteractiveServer
+
+@using ManualDoCoroinha.Shared.DTOs;
+@using ManualDoCoroinha.Web.Components.Layout
+
+<PageTitle>Login</PageTitle>
+
+<div class="login-page">
+
+    <RadzenCard class="login-card">
+
+        <div class="login-header">
+
+            <RadzenImage Path="images/crucifix_rays.svg"
+                         Style="width: 100px; height: 100px; margin-bottom: 20px;" />
+
+            <RadzenText TextStyle="TextStyle.H4"
+                        class="login-title">
+                Manual do Coroinha
+            </RadzenText>
+
+            <RadzenText TextStyle="TextStyle.Body2"
+                        class="login-subtitle">
+                Área Administrativa
+            </RadzenText>
+
+        </div>
+
+        <EditForm Model="@loginModel"
+                  OnValidSubmit="Login"
+                  Context="loginContext">
+
+            <DataAnnotationsValidator />
+
+            <div class="login-form">
+
+                <div class="input-group">
+
+                    <label>E-mail</label>
+
+                    <RadzenTextBox @bind-Value="loginModel.Email"
+                                   Name="Email"
+                                   Placeholder="Digite seu e-mail"
+                                   class="login-input" />
+
+                    <ValidationMessage For="@(() => loginModel.Email)" />
+
+                </div>
+
+                <div class="input-group">
+
+                    <label>Senha</label>
+
+                    <RadzenPassword @bind-Value="loginModel.Password"
+                                    Name="Password"
+                                    Placeholder="Digite sua senha"
+                                    class="login-input" />
+
+                    <ValidationMessage For="@(() => loginModel.Password)" />
+
+                </div>
+
+                @if (!string.IsNullOrWhiteSpace(errorMessage))
+                {
+                    <div class="login-error">
+
+                        <RadzenIcon Icon="error_outline" />
+
+                        <span>@errorMessage</span>
+
+                    </div>
+                }
+
+                <RadzenButton Text="Entrar"
+                              ButtonType="ButtonType.Submit"
+                              ButtonStyle="ButtonStyle.Primary"
+                              class="login-button" />
+
+            </div>
+
+        </EditForm>
+
+        <div class="login-footer">
+            <RadzenText TextStyle="TextStyle.Caption">
+                Manual do Coroinha
+            </RadzenText>
+        </div>
+
+    </RadzenCard>
+
+</div>  
+
+@code {
+
+    private LoginModel loginModel = new();
+
+    private string? errorMessage;
+
+    private async Task Login()
+    {
+        
+    }
+}
